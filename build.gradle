@@ -1,0 +1,21 @@
+plugins {
+    id 'java'
+}
+
+group = 'ru.ElenaK'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation platform('org.junit:junit-bom:5.10.0')
+    testImplementation(
+            "io.rest-assured:rest-assured:5.1.0",
+            'org.junit.jupiter:junit-jupiter')
+}
+
+test {
+    useJUnitPlatform()
+}
