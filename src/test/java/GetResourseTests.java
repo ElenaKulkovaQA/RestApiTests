@@ -11,17 +11,11 @@ import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class GetResourseTests {
-
-    @BeforeAll
-    public static void setUp() {
-        RestAssured.baseURI = "https://reqres.in";
-        RestAssured.basePath = "/api";
-    }
+public class GetResourseTests extends TestBase {
 
     @Test
     @DisplayName("Получить размер списка всех ресурсов")
-    void getSizeOfAllResoursesList() {
+    void getSizeOfAllResoursesListTest() {
         int allResourse = 12;
         given()
                 .log().uri()
@@ -36,7 +30,7 @@ public class GetResourseTests {
 
     @Test
     @DisplayName("Получить размер списка ресурсов на странице")
-    void getUsersListSizeOnThePageesResourses() {
+    void getUsersListSizeOnThePageesResoursesTest() {
         int usersListSize = 6;
         given()
                 .log().uri()
@@ -51,7 +45,7 @@ public class GetResourseTests {
 
     @Test
     @DisplayName("Сравнить ожидаемый список Id с полученным после запроса")
-    void compareExpectedListOfIdsAndActual() {
+    void compareExpectedListOfIdsAndActualTest() {
         List<Integer> expectedId = List.of(1, 2, 3, 4, 5, 6);
         Response response = given()
                 .log().uri()

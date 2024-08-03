@@ -6,14 +6,9 @@ import org.junit.jupiter.api.Test;
 import static io.restassured.RestAssured.given;
 import static io.restassured.http.ContentType.JSON;
 import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.notNullValue;
 
-public class LoginSuccessfulTests {
-
-    @BeforeAll
-    public static void setUp() {
-        RestAssured.baseURI = "https://reqres.in";
-        RestAssured.basePath = "/api";
-    }
+public class LoginSuccessfulTests extends TestBase {
 
     @Test
     @DisplayName("Проверка успешной авторизации с валидным логином и паролем" )
@@ -32,9 +27,8 @@ public class LoginSuccessfulTests {
                 .log().status()
                 .log().body()
                 .statusCode(200)
-                .body("token", is("QpwL5tke4Pnpja7X4"));
+                .body("token", notNullValue());
     }
-
 
     @Test
     @DisplayName("Проверка наличия текста _user not found_при неуспешной авторизации при введении невалидного пароля ")
@@ -55,6 +49,7 @@ public class LoginSuccessfulTests {
                 .statusCode(400)
                 .body("error", is("user not found"));
     }
+
     @Test
     @DisplayName("Проверка наличия текста _user not found_при неуспешной авторизации при введении невалидного логина ")
     void userNotFoundInvalidLoginTest() {

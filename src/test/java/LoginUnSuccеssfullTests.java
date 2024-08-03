@@ -7,12 +7,7 @@ import static io.restassured.RestAssured.given;
 import static io.restassured.http.ContentType.JSON;
 import static org.hamcrest.Matchers.is;
 
-public class LoginUnSuccеssfullTests {
-    @BeforeAll
-    public static void setUp() {
-        RestAssured.baseURI = "https://reqres.in";
-        RestAssured.basePath = "/api";
-    }
+public class LoginUnSuccеssfullTests extends TestBase {
 
     @Test
     @DisplayName("Проверка сообщения при неуспешной попытке залогиниться без введения пароля")
