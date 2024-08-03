@@ -1,5 +1,5 @@
-import io.restassured.RestAssured;
-import org.junit.jupiter.api.BeforeAll;
+package tests;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -7,7 +7,7 @@ import static io.restassured.RestAssured.given;
 import static io.restassured.http.ContentType.JSON;
 import static org.hamcrest.Matchers.is;
 
-public class CreateTest extends TestBase{
+public class CreateTest extends TestBase {
 
     @Test
     @DisplayName("Успешное Создание нового пользователя c именем и работой")

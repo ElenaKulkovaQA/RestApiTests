@@ -1,6 +1,6 @@
-import io.restassured.RestAssured;
+package tests;
+
 import io.restassured.response.Response;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
