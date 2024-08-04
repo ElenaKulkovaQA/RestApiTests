@@ -11,7 +11,7 @@ import static io.restassured.RestAssured.given;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static specs.LoginSpec.*;
 
-public class LombokLoginUnSuccеssfullTests extends TestBase {
+public class LombokLoginUnSuccеssfullStepTests extends TestBase {
 
     LoginBodyModelLombok authData = new LoginBodyModelLombok();
 

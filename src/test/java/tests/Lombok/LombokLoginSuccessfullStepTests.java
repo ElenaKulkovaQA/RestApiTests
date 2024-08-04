@@ -6,15 +6,13 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import tests.TestBase;
 
-import static helpers.CustomApiListener.withCustomTemplates;
 import static io.qameta.allure.Allure.step;
 import static io.restassured.RestAssured.given;
-import static io.restassured.http.ContentType.JSON;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static specs.LoginSpec.loginRequestSpec;
 import static specs.LoginSpec.loginResponseSpec;
 
-public class LombokLoginSuccessfulTests extends TestBase {
+public class LombokLoginSuccessfullStepTests extends TestBase {
 
     LoginBodyModelLombok authData = new LoginBodyModelLombok();
 
