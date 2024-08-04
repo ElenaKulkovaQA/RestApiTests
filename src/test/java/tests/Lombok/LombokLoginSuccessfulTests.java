@@ -11,6 +11,8 @@ import static io.qameta.allure.Allure.step;
 import static io.restassured.RestAssured.given;
 import static io.restassured.http.ContentType.JSON;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static specs.LoginSpec.loginRequestSpec;
+import static specs.LoginSpec.loginResponseSpec;
 
 public class LombokLoginSuccessfulTests extends TestBase {
 
@@ -28,21 +30,14 @@ public class LombokLoginSuccessfulTests extends TestBase {
         step("Ввести валидный логин и пароль", () -> {
                     return
                             given()
-
-                                    .filter(withCustomTemplates())
-                                    .log().uri()
-                                    .log().body()
-                                    .log().headers()
+                                    .spec(loginRequestSpec)
                                     .body(authData)
-                                    .contentType(JSON)
 
                                     .when()
                                     .post("login")
 
                                     .then()
-                                    .log().status()
-                                    .log().body()
-                                    .statusCode(200)
+                                    .spec(loginResponseSpec)
                                     .extract().as(LoginResponseModelLombok.class);// размаппить ответ и наложить его на класс LoginResponseModel
                 });
 

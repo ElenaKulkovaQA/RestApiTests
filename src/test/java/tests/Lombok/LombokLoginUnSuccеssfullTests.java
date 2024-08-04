@@ -1,17 +1,15 @@
 package tests.Lombok;
 
-import io.qameta.allure.restassured.AllureRestAssured;
 import model.lombok.LoginBodyModelLombok;
 import model.lombok.LoginResponseModelLombok;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import tests.TestBase;
 
-import static helpers.CustomApiListener.withCustomTemplates;
+import static io.qameta.allure.Allure.step;
 import static io.restassured.RestAssured.given;
-import static io.restassured.http.ContentType.JSON;
-import static org.hamcrest.Matchers.is;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static specs.LoginSpec.*;
 
 public class LombokLoginUnSuccеssfullTests extends TestBase {
 
@@ -24,24 +22,26 @@ public class LombokLoginUnSuccеssfullTests extends TestBase {
         authData.setEmail("eve.holt@reqres.in");
         authData.setPassword("");
 
-        LoginResponseModelLombok response = given()
+        LoginResponseModelLombok response =
 
-                .filter(withCustomTemplates())
-                .log().uri()
-                .log().body()
-                .log().headers()
-                .body(authData)
-                .contentType(JSON)
+        step("Ввести валидный логин и невалидный пароль", () -> {
+                    return
+                            given()
+                                    .spec(loginRequestSpec)
+                                    .body(authData)
 
-                .when()
-                .post("/login")
+                                    .when()
+                                    .post("/login")
 
-                .then()
-                .log().status()
-                .log().body()
-                .statusCode(400)
-                .extract().as(LoginResponseModelLombok.class);
-        assertEquals("Missing password", response.getError());
+                                    .then()
+                                    .spec(missingPasswordResponseSpec)
+                                    .extract().as(LoginResponseModelLombok.class);
+                });
+
+        step("Проверить соответствие текста в ответе", () -> {
+            assertEquals("Missing password", response.getError());
+
+        });
     }
 
 
@@ -52,23 +52,25 @@ public class LombokLoginUnSuccеssfullTests extends TestBase {
         authData.setEmail("eveasdas.holt@reqres.in");
         authData.setPassword("cityslicka");
 
-        LoginResponseModelLombok response = given()
+        LoginResponseModelLombok response =
 
-                .filter(withCustomTemplates())
-                .log().uri()
-                .log().body()
-                .log().headers()
-                .body(authData)
-                .contentType(JSON)
+                step("Ввести валидный логин и невалидный пароль", () -> {
+                    return
+                            given()
+                                    .spec(loginRequestSpec)
+                                    .body(authData)
 
-                .when()
-                .post("/login")
+                                    .when()
+                                    .post("/login")
 
-                .then()
-                .log().status()
-                .log().body()
-                .statusCode(400)
-                .extract().as(LoginResponseModelLombok.class);
-        assertEquals("user not found",response.getError());
+                                    .then()
+                                    .spec(userNotFoundResponseSpec)
+                                    .extract().as(LoginResponseModelLombok.class);
+                });
+
+        step("Проверить соответствие текста в ответе", () -> {
+            assertEquals("user not found", response.getError());
+
+        });
     }
 }
