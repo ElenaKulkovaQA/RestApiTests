@@ -8,6 +8,7 @@ import utils.TestData;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
+import static specs.CreateSpec.*;
 import static specs.LoginSpec.*;
 
 public class LombokCreateTest extends TestBase {
@@ -23,7 +24,7 @@ public class LombokCreateTest extends TestBase {
 
         given()
 
-                .spec(loginRequestSpec)
+                .spec(createRequestSpec)
                 .body(authData)
 
                 .when()
@@ -47,17 +48,15 @@ public class LombokCreateTest extends TestBase {
 
         given()
 
-                .spec(loginRequestSpec)
+                .spec(createRequestSpec)
                 .body(userData)
 
                 .when()
                 .post("/users")
 
                 .then()
-                .spec(userNotCreatResponseSpec)
-                .log().status()
-                .log().body()
-                .statusCode(400);
+                .spec(userNotCreatResponseSpec);
+
     }
 
     @Test
@@ -70,16 +69,14 @@ public class LombokCreateTest extends TestBase {
 
         given()
 
-                .spec(loginRequestSpec)
+                .spec(createRequestSpec)
                 .body(userData)
 
                 .when()
                 .post("/users")
 
                 .then()
-                .spec(userNotCreatResponseSpec)
-                .log().status()
-                .log().body()
-                .statusCode(400);
+                .spec(userNotCreatResponseSpec);
+
     }
 }
