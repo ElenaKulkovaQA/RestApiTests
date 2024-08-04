@@ -6,10 +6,9 @@ import org.junit.jupiter.api.Test;
 import tests.TestBase;
 import utils.TestData;
 
-import static helpers.CustomApiListener.withCustomTemplates;
 import static io.restassured.RestAssured.given;
-import static io.restassured.http.ContentType.JSON;
 import static org.hamcrest.Matchers.equalTo;
+import static specs.LoginSpec.*;
 
 public class LombokCreateTest extends TestBase {
 
@@ -24,22 +23,18 @@ public class LombokCreateTest extends TestBase {
 
         given()
 
-                .filter(withCustomTemplates())
-                .log().uri()
-                .log().body()
-                .log().headers()
+                .spec(loginRequestSpec)
                 .body(authData)
-                .contentType(JSON)
 
                 .when()
                 .post("/users")
 
                 .then()
-                .log().status()
-                .log().body()
-                .statusCode(201)
+                .spec(successfulUserСreatResponseSpec)
+
                 .body("name", equalTo(authData.getName()))
                 .body("job", equalTo(authData.getJob()));
+
     }
 
 
@@ -52,17 +47,14 @@ public class LombokCreateTest extends TestBase {
 
         given()
 
-                .filter(withCustomTemplates())
-                .log().uri()
-                .log().body()
-                .log().headers()
+                .spec(loginRequestSpec)
                 .body(userData)
-                .contentType(JSON)
 
                 .when()
                 .post("/users")
 
                 .then()
+                .spec(userNotCreatResponseSpec)
                 .log().status()
                 .log().body()
                 .statusCode(400);
@@ -78,17 +70,14 @@ public class LombokCreateTest extends TestBase {
 
         given()
 
-                .filter(withCustomTemplates())
-                .log().uri()
-                .log().body()
-                .log().headers()
+                .spec(loginRequestSpec)
                 .body(userData)
-                .contentType(JSON)
 
                 .when()
                 .post("/users")
 
                 .then()
+                .spec(userNotCreatResponseSpec)
                 .log().status()
                 .log().body()
                 .statusCode(400);

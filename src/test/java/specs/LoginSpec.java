@@ -35,4 +35,14 @@ public class LoginSpec {
             .log(STATUS)
             .log(BODY)
             .build();
+    public static ResponseSpecification successfulUserСreatResponseSpec = new ResponseSpecBuilder()
+            .expectStatusCode(201)
+            .log(STATUS)
+            .log(BODY)
+            .build();
+    public static ResponseSpecification userNotCreatResponseSpec = new ResponseSpecBuilder()
+            .expectStatusCode(400)
+            .log(STATUS)
+            .log(BODY)
+            .build();
 }

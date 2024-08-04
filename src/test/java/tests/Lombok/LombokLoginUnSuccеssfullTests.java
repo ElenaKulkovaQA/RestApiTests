@@ -1,13 +1,17 @@
 package tests.Lombok;
 
+import io.qameta.allure.restassured.AllureRestAssured;
 import model.lombok.LoginBodyModelLombok;
 import model.lombok.LoginResponseModelLombok;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import tests.TestBase;
 
+import static helpers.CustomApiListener.withCustomTemplates;
 import static io.qameta.allure.Allure.step;
 import static io.restassured.RestAssured.given;
+
+import static org.hamcrest.Matchers.is;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static specs.LoginSpec.*;
 
@@ -24,7 +28,7 @@ public class LombokLoginUnSuccеssfullTests extends TestBase {
 
         LoginResponseModelLombok response =
 
-        step("Ввести валидный логин и невалидный пароль", () -> {
+                step("Ввести валидный логин и невалидный пароль", () -> {
                     return
                             given()
                                     .spec(loginRequestSpec)

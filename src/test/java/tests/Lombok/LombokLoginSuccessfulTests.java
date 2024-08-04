@@ -27,7 +27,7 @@ public class LombokLoginSuccessfulTests extends TestBase {
 
         LoginResponseModelLombok response =
 
-        step("Ввести валидный логин и пароль", () -> {
+                step("Ввести валидный логин и пароль", () -> {
                     return
                             given()
                                     .spec(loginRequestSpec)
