@@ -1,5 +1,6 @@
 package tests.Pojo;
 
+import model.pojo.LoginBodyModelPojo;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import tests.TestBase;
@@ -9,6 +10,7 @@ import static io.restassured.http.ContentType.JSON;
 import static org.hamcrest.Matchers.is;
 
 public class PojoCreateTest extends TestBase {
+    LoginBodyModelPojo authData = new LoginBodyModelPojo();
 
     @Test
     @DisplayName("Успешное Создание нового пользователя c именем и работой")
