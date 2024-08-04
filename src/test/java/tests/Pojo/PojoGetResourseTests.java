@@ -1,8 +1,9 @@
-package tests;
+package tests.Pojo;
 
 import io.restassured.response.Response;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import tests.TestBase;
 
 import java.util.List;
 
@@ -11,7 +12,7 @@ import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class GetResourseTests extends TestBase {
+public class PojoGetResourseTests extends TestBase {
 
     @Test
     @DisplayName("Получить размер списка всех ресурсов")

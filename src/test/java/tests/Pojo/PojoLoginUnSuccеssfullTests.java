@@ -1,13 +1,14 @@
-package tests;
+package tests.Pojo;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import tests.TestBase;
 
 import static io.restassured.RestAssured.given;
 import static io.restassured.http.ContentType.JSON;
 import static org.hamcrest.Matchers.is;
 
-public class LoginUnSuccеssfullTests extends TestBase {
+public class PojoLoginUnSuccеssfullTests extends TestBase {
 
     @Test
     @DisplayName("Проверка сообщения при неуспешной попытке залогиниться без введения пароля")

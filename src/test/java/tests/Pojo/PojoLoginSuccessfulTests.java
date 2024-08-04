@@ -1,32 +1,39 @@
-package tests;
+package tests.Pojo;
 
-import model.LoginBodyModel;
-import model.LoginResponseModel;
+import model.lombok.LoginResponseModelLombok;
+import model.pojo.LoginBodyModelPojo;
+import model.pojo.LoginResponseModelPojo;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import tests.TestBase;
 
+import static helpers.CustomApiListener.withCustomTemplates;
 import static io.restassured.RestAssured.given;
 import static io.restassured.http.ContentType.JSON;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.notNullValue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class LoginSuccessfulTests extends TestBase {
+public class PojoLoginSuccessfulTests extends TestBase {
+
+    LoginBodyModelPojo authData = new LoginBodyModelPojo();
 
     @Test
     @DisplayName("Проверка успешной авторизации с валидным логином и паролем")
     void successfulLoginTest() {
         //String authData = "{\"email\": \"eve.holt@reqres.in\", \"password\": \"cityslicka\"}";
 
-        LoginBodyModel authData = new LoginBodyModel();
         authData.setEmail("eve.holt@reqres.in");
         authData.setPassword("cityslicka");
 
-        LoginResponseModel response = given()
+        LoginResponseModelPojo response = given()
 
+                .filter(withCustomTemplates())
+                .log().uri()
+                .log().body()
+                .log().headers()
                 .body(authData)
                 .contentType(JSON)
-                .log().uri()
 
                 .when()
                 .post("login")
@@ -35,7 +42,7 @@ public class LoginSuccessfulTests extends TestBase {
                 .log().status()
                 .log().body()
                 .statusCode(200)
-                .extract().as(LoginResponseModel.class);// размаппить ответ и наложить его на класс LoginResponseModel
+                .extract().as(LoginResponseModelPojo.class);// размаппить ответ и наложить его на класс LoginResponseModel
 
         assertEquals("QpwL5tke4Pnpja7X4", response.getToken());// проверить, что токен совпадает с ответом в классе
 
