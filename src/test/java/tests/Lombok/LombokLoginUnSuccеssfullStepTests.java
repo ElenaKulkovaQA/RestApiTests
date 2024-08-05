@@ -8,9 +8,9 @@ import tests.TestBase;
 
 import static io.qameta.allure.Allure.step;
 import static io.restassured.RestAssured.given;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.assertj.core.api.Assertions.assertThat;
 import static specs.RequestPackegeSpec.requestSpec;
-import static specs.ResponsePackegeSpec.*;
+import static specs.ResponsePackegeSpec.responseCode400Spec;
 
 public class LombokLoginUnSuccеssfullStepTests extends TestBase {
 
@@ -40,8 +40,8 @@ public class LombokLoginUnSuccеssfullStepTests extends TestBase {
                 });
 
         step("Проверить соответствие текста в ответе", () -> {
-            assertEquals("Missing password", response.getError());
-
+            //assertEquals("Missing password", response.getError());
+            assertThat(response.getError()).isEqualTo("Missing password");
         });
     }
 
@@ -70,8 +70,8 @@ public class LombokLoginUnSuccеssfullStepTests extends TestBase {
                 });
 
         step("Проверить соответствие текста в ответе", () -> {
-            assertEquals("user not found", response.getError());
-
+            // assertEquals("user not found", response.getError());
+            assertThat(response.getError()).isEqualTo("user not found");
         });
     }
 }
