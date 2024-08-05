@@ -9,7 +9,8 @@ import tests.TestBase;
 import static io.qameta.allure.Allure.step;
 import static io.restassured.RestAssured.given;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static specs.LoginSpec.*;
+import static specs.RequestPackegeSpec.requestSpec;
+import static specs.ResponsePackegeSpec.*;
 
 public class LombokLoginUnSuccеssfullStepTests extends TestBase {
 
@@ -27,14 +28,14 @@ public class LombokLoginUnSuccеssfullStepTests extends TestBase {
                 step("Ввести валидный логин и невалидный пароль", () -> {
                     return
                             given()
-                                    .spec(loginRequestSpec)
+                                    .spec(requestSpec)
                                     .body(authData)
 
                                     .when()
                                     .post("/login")
 
                                     .then()
-                                    .spec(missingPasswordResponseSpec)
+                                    .spec(responseCode400Spec)
                                     .extract().as(LoginResponseModelLombok.class);
                 });
 
@@ -57,14 +58,14 @@ public class LombokLoginUnSuccеssfullStepTests extends TestBase {
                 step("Ввести валидный пароль и невалидный логин", () -> {
                     return
                             given()
-                                    .spec(loginRequestSpec)
+                                    .spec(requestSpec)
                                     .body(authData)
 
                                     .when()
                                     .post("/login")
 
                                     .then()
-                                    .spec(userNotFoundResponseSpec)
+                                    .spec(responseCode400Spec)
                                     .extract().as(LoginResponseModelLombok.class);
                 });
 

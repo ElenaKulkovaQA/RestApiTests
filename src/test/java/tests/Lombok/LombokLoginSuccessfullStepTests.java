@@ -9,8 +9,8 @@ import tests.TestBase;
 import static io.qameta.allure.Allure.step;
 import static io.restassured.RestAssured.given;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static specs.LoginSpec.loginRequestSpec;
-import static specs.LoginSpec.loginResponseSpec;
+import static specs.RequestPackegeSpec.requestSpec;
+import static specs.ResponsePackegeSpec.responseCode200Spec;
 
 public class LombokLoginSuccessfullStepTests extends TestBase {
 
@@ -28,14 +28,14 @@ public class LombokLoginSuccessfullStepTests extends TestBase {
                 step("Ввести валидный логин и пароль", () -> {
                     return
                             given()
-                                    .spec(loginRequestSpec)
+                                    .spec(requestSpec)
                                     .body(authData)
 
                                     .when()
                                     .post("login")
 
                                     .then()
-                                    .spec(loginResponseSpec)
+                                    .spec(responseCode200Spec)
                                     .extract().as(LoginResponseModelLombok.class);// размаппить ответ и наложить его на класс LoginResponseModel
                 });
 
