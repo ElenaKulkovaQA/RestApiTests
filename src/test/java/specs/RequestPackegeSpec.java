@@ -13,9 +13,7 @@ import static io.restassured.http.ContentType.JSON;
 public class RequestPackegeSpec {
     public static RequestSpecification requestSpec = with()
             .filter(withCustomTemplates())
-            .log().uri()
-            .log().body()
-            .log().headers()
+            .log().all()
             .contentType(JSON);
 
 }
